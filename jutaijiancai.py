@@ -22,7 +22,7 @@ class jutaijiancai:
         self.split_data()
         self.train_model()
         self.Output()
-
+#读取数据
     def read_data(self):
         self.origin = pd.read_csv("jutaijiancai20180417-20180613.csv",encoding="ansi")
         self.originC5 = self.origin[["时间","TE506.PV","TE514.PV","TE708.PV","MMYW_AI1.PV"]]
