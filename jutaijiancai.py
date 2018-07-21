@@ -12,7 +12,7 @@ class jutaijiancai:
         self.read_data()
         self.start = date
         self.ahead = ahead
-        self.epoch = 50
+        self.epoch = 100
         self.batch_size = 72
         self.hidden_cell = 50
         self.output_cell = 1
