@@ -67,7 +67,7 @@ class jutaijiancai:
         # fit network
         self.history = self.model.fit(self.train_X, self.train_y, epochs=self.epoch, batch_size=self.batch_size, validation_data=(self.test_X, self.test_y), verbose=2,
                             shuffle=False)
-        plot_model(self.model, to_file='model hidden_cell %d output_cell %d.png'%(self.hidden_cell,self.output_cell))
+        plot_model(self.model, to_file='%d s model hidden_cell %d output_cell %d.png'%(self.ahead,self.hidden_cell,self.output_cell))
 
         pass
 
@@ -82,7 +82,7 @@ class jutaijiancai:
         plt.ylabel("mae", size=20)
         plt.xticks(size=20)
         plt.yticks(size=20)
-        plt.savefig("%d  epochs Iteration.png" % (self.epoch))
+        plt.savefig("%d s %d  epochs Iteration.png" % (self.ahead,self.epoch))
 
         self.predict_y = self.model.predict(self.test_X).reshape(-1)
         self.predict = pd.DataFrame(self.scale.inverse_transform(pd.concat([pd.DataFrame(self.predict_y), pd.DataFrame(self.test_X.reshape(-1, 3))], axis=1))).iloc[:,0]
@@ -93,13 +93,13 @@ class jutaijiancai:
         plt.figure(figsize=(30, 20))
         plt.plot(self.predict, label='predict')
         plt.plot(self.real, label='real')
-        plt.title("LSTM  performance in test_set", size=20)
+        plt.title("LSTM  performance in test_set mae: %.2f, mape: %.2f"%(self.mae,self.mape), size=20)
         plt.xlabel("time", size=20)
         plt.ylabel("℃", size=20)
         plt.xticks(size=20)
         plt.yticks(size=20)
         plt.legend(fontsize=20)
-        plt.savefig("epoch %d_%d w.png"%(self.epoch,int(self.train_data.shape[0]/10000)))
+        plt.savefig("%d s epoch %d_%d w.png"%(self.ahead,self.epoch,int(self.train_data.shape[0]/10000)))
         print("mae: %.2f,  mape: %.2f"%(self.mae,self.mape))
 
 
